@@ -12,6 +12,7 @@ mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/root
 cd /data/data/com.termux/files/home/pd-andronix/debian/root
 curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/debian-stable/debian-stable-$(dpkg --print-architecture).tar.xz -O debian.tar.xz
 proot --link2symlink tar -xJf debian.tar.xz
+rm debian.tar.xz
 mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/binds
 mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/root/proc/fakethings
 
@@ -206,3 +207,4 @@ termux-fix-shebang /data/data/com.termux/files/usr/bin/debian-cli
 chmod +x /data/data/com.termux/files/usr/bin/debian-cli
 echo "Installation Complete!"
 echo "You can now launch debian-cli with the command debian-cli from next time"
+debian-cli
