@@ -11,7 +11,7 @@ apt install curl wget nano proot tar xz-utils -y
 echo "download and extract rootfs under /data/data/com.termux/files/home/pd-andronix/<distroname>"
 mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/root
 cd /data/data/com.termux/files/home/pd-andronix/debian/root
-curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/debian-stable/debian-stable-$(dpkg --print-architecture).tar.xz -O debian.tar.xz
+curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/debian-stable/debian-stable-$(dpkg --print-architecture).tar.xz -o debian.tar.xz
 proot --link2symlink tar -xJf debian.tar.xz
 rm debian.tar.xz
 mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/binds
