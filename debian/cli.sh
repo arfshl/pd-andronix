@@ -1,6 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 termux-setup-storage
 # Update installed package but keep configuration
+apt update
 apt upgrade -y -o Dpkg::Options::="--force-confold"
 
 # Install depedency
