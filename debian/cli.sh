@@ -9,16 +9,16 @@ apt install curl wget nano proot tar xz-utils -y
 
 # download and extract rootfs under /data/data/com.termux/files/home/pd-andronix/<distroname>
 echo "download and extract rootfs under /data/data/com.termux/files/home/pd-andronix/<distroname>"
-mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/root
-cd /data/data/com.termux/files/home/pd-andronix/debian/root
+mkdir -p /data/data/com.termux/files/home/pd-andronix/debian
+cd /data/data/com.termux/files/home/pd-andronix/debian
 curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/debian-stable/debian-stable-$(dpkg --print-architecture).tar.xz -o debian.tar.xz
 proot --link2symlink tar -xJf debian.tar.xz
 rm debian.tar.xz
 mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/binds
-mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/root/proc/fakethings
+mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/debian/root/proc/fakethings/stat" ]; then
-	cat <<- EOF > "/data/data/com.termux/files/home/pd-andronix/debian/root/proc/fakethings/stat"
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/stat" ]; then
+	cat <<- EOF > "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/stat"
 	cpu  5502487 1417100 4379831 62829678 354709 539972 363929 0 0 0
 	cpu0 611411 171363 667442 7404799 61301 253898 205544 0 0 0
 	cpu1 660993 192673 571402 7853047 39647 49434 29179 0 0 0
@@ -38,14 +38,14 @@ if [ ! -f "/data/data/com.termux/files/home/pd-andronix/debian/root/proc/fakethi
 	EOF
 fi
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/debian/root/proc/fakethings/version" ]; then
-	cat <<- EOF > "/data/data/com.termux/files/home/pd-andronix/debian/root/fakethings/version"
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/version" ]; then
+	cat <<- EOF > "/data/data/com.termux/files/home/pd-andronix/debian/debian/fakethings/version"
 	Linux version 6.18 (pd-andronix) (gcc version 14.2 (fake /proc/fakethings/version) ) (10040828) #1 SMP PREEMPT Fri Apr 10 00:00:00 WIB 2026
 	EOF
 fi
 
-if [ ! -f "$/data/data/com.termux/files/home/pd-andronix/debian/root/proc/fakethings/vmstat" ]; then
-	cat <<- EOF > "/data/data/com.termux/files/home/pd-andronix/debian/root/proc/fakethings/vmstat"
+if [ ! -f "$/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/vmstat" ]; then
+	cat <<- EOF > "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/vmstat"
 	nr_free_pages 15717
 	nr_zone_inactive_anon 87325
 	nr_zone_active_anon 259521
@@ -161,7 +161,7 @@ command="proot"
 command+=" --kill-on-exit"
 command+=" --link2symlink"
 command+=" -0"
-command+=" -r ${root}/root"
+command+=" -r ${root}/debian"
 if [ -n "\$(ls -A )" ${root}/binds]; then
     for f in ${root}/binds/* ;do
       . \$f
@@ -171,15 +171,15 @@ command+=" -b /dev"
 command+=" -b /proc"
 command+=" -b /sys"
 command+=" -b /data"
-command+=" -b ${root}/root:/dev/shm"
+command+=" -b ${root}/debian:/dev/shm"
 command+=" -b /proc/self/fd/2:/dev/stderr"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /dev/urandom:/dev/random"
 command+=" -b /proc/self/fd:/dev/fd"
-command+=" -b ${root}/root/proc/fakethings/stat:/proc/stat"
-command+=" -b ${root}/root/proc/fakethings/vmstat:/proc/vmstat"
-command+=" -b ${root}/root/proc/fakethings/version:/proc/version"
+command+=" -b ${root}/debian/proc/fakethings/stat:/proc/stat"
+command+=" -b ${root}/debian/proc/fakethings/vmstat:/proc/vmstat"
+command+=" -b ${root}/debian/proc/fakethings/version:/proc/version"
 ## uncomment the following line to have access to the home directory of termux
 #command+=" -b /data/data/com.termux/files/home:/root"
 command+=" -b /data/data/com.termux/files/home:/root"
@@ -200,10 +200,10 @@ else
 fi
 EOF
 
-chmod +x ${root}/root/root/.bash_profile
-echo "127.0.0.1 localhost localhost" > /data/data/com.termux/files/home/pd-andronix/debian/root/etc/hosts
-echo "nameserver 1.1.1.1" > /data/data/com.termux/files/home/pd-andronix/debian/root/etc/resolv.conf
-chmod +x /data/data/com.termux/files/home/pd-andronix/debian/root/etc/resolv.conf
+chmod +x ${root}/debian/root/.bash_profile
+echo "127.0.0.1 localhost localhost" > /data/data/com.termux/files/home/pd-andronix/debian/debian/etc/hosts
+echo "nameserver 1.1.1.1" > /data/data/com.termux/files/home/pd-andronix/debian/debian/etc/resolv.conf
+chmod +x /data/data/com.termux/files/home/pd-andronix/debian/debian/etc/resolv.conf
 termux-fix-shebang /data/data/com.termux/files/usr/bin/debian-cli
 chmod +x /data/data/com.termux/files/usr/bin/debian-cli
 echo "Installation Complete!"
