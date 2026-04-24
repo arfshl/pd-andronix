@@ -153,7 +153,7 @@ if [ ! -f "$/data/data/com.termux/files/home/pd-andronix/debian/root/proc/faketh
 fi
 
 cat >> /data/data/com.termux/files/usr/bin/debian-cli <<- EOF
-#!/bin/sh
+#!/bin/bash
 root="/data/data/com.termux/files/home/pd-andronix/debian"
 ## unset LD_PRELOAD in case termux-exec is installed
 unset LD_PRELOAD
@@ -193,7 +193,7 @@ command+=" TERM=\$TERM"
 command+=" LANG=C.UTF-8"
 command+=" /bin/bash --login"
 com="\$@"
-if [ -z "\$1" ];then
+if [ -z "\$1" ]; then
     exec \$command
 else
     \$command -c "\$com"
@@ -201,9 +201,9 @@ fi
 EOF
 
 chmod +x ${root}/root/root/.bash_profile
-echo "127.0.0.1 localhost localhost" > ${root}/root/etc/hosts
-echo "nameserver 1.1.1.1" > ${root}/root/etc/resolv.conf
-chmod +x ${root}/root/etc/resolv.conf
+echo "127.0.0.1 localhost localhost" > /data/data/com.termux/files/home/pd-andronix/debian/root/etc/hosts
+echo "nameserver 1.1.1.1" > /data/data/com.termux/files/home/pd-andronix/debian/root/etc/resolv.conf
+chmod +x /data/data/com.termux/files/home/pd-andronix/debian/root/etc/resolv.conf
 termux-fix-shebang /data/data/com.termux/files/usr/bin/debian-cli
 chmod +x /data/data/com.termux/files/usr/bin/debian-cli
 echo "Installation Complete!"
