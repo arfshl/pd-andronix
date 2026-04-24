@@ -13,16 +13,16 @@ echo "download and extract rootfs under /data/data/com.termux/files/home/pd-andr
 ARCH=$(uname -m)
 case "$ARCH" in
     armhf|arm|armv7l) 
-        ARCH_DEBIAN="armhf" 
+        ARCH="armhf" 
         ;;
     aarch64|arm64) 
-        ARCH_DEBIAN="arm64" 
+        ARCH="arm64" 
         ;;
     x86_64|amd64)
-        ARCH_DEBIAN="amd64"
+        ARCH="amd64"
         ;;
     i386|i686)
-        ARCH_DEBIAN="i386"
+        ARCH="i386"
         ;;
     *)
         echo "Unsupported architecture: $ARCH"
