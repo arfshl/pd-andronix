@@ -29,7 +29,7 @@ esac
 
 mkdir -p /data/data/com.termux/files/home/pd-andronix/debian
 cd /data/data/com.termux/files/home/pd-andronix/debian
-curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/debian-stable/debian-stable-$(dpkg --print-architecture).tar.xz -o debian.tar.xz
+curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/debian-stable/debian-stable-$ARCH.tar.xz -o debian.tar.xz
 proot --link2symlink tar -xJf debian.tar.xz
 rm debian.tar.xz
 mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/binds
