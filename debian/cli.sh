@@ -201,8 +201,8 @@ command+=" -b ${root}/debian/proc/fakethings/vmstat:/proc/vmstat"
 command+=" -b ${root}/debian/proc/fakethings/version:/proc/version"
 ## uncomment the following line to have access to the home directory of termux
 #command+=" -b /data/data/com.termux/files/home:/root"
-command+=" -b /data/data/com.termux/files/home:/root"
-command+=" -b /sdcard"
+## uncomment the following line to mount /sdcard directly to / 
+#command+=" -b /sdcard"
 command+=" -w /root"
 command+=" /usr/bin/env -i"
 command+=" MOZ_FAKE_NO_SANDBOX=1"
