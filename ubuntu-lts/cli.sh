@@ -27,8 +27,8 @@ case "$ARCH" in
         ;;
 esac
 
-mkdir -p /data/data/com.termux/files/home/pd-andronix/ubuntu-lts-lts
-cd /data/data/com.termux/files/home/pd-andronix/ubuntu-lts-lts
+mkdir -p /data/data/com.termux/files/home/pd-andronix/ubuntu-lts
+cd /data/data/com.termux/files/home/pd-andronix/ubuntu-lts
 curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/ubuntu-lts/ubuntu-lts-$ARCH.tar.xz --output ubuntu.tar.xz
 proot --link2symlink tar -xJpf ubuntu.tar.xz
 rm ubuntu.tar.xz
@@ -36,138 +36,233 @@ mv ubuntu-*-* ubuntu
 mkdir -p /data/data/com.termux/files/home/pd-andronix/ubuntu-lts/binds
 mkdir -p /data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings/stat" ]; then
-cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings/stat"
-cpu  5502487 1417100 4379831 62829678 354709 539972 363929 0 0 0
-cpu0 611411 171363 667442 7404799 61301 253898 205544 0 0 0
-cpu1 660993 192673 571402 7853047 39647 49434 29179 0 0 0
-cpu2 666965 186509 576296 7853110 39012 48973 26407 0 0 0
-cpu3 657630 183343 573805 7863627 38895 48768 26636 0 0 0
-cpu4 620516 161440 594973 7899146 39438 47605 26467 0 0 0
-cpu5 610849 155665 594684 7912479 40258 46870 26044 0 0 0
-cpu6 857685 92294 387182 8096756 46609 22110 12364 0 0 0
-cpu7 816434 273809 414043 7946709 49546 22311 11284 0 0 0
-intr 601715486 0 0 0 0 70612466 0 2949552 0 93228 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12862684 625329 10382717 16209 55315 8510 0 0 0 0 11 11 13 270 192 40694 95 7 0 0 0 36850 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 286 6378 0 0 0 54 0 3239423 2575191 82725 0 0 127 0 0 0 1791277 850609 20 9076504 0 301 0 0 0 0 0 3834621 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 806645 0 0 0 0 0 7243 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2445850 52 1783 0 0 5091520 0 0 0 3 0 0 0 0 0 5475 0 198001 0 2 42 1289224 0 2 202483 4 0 8390 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3563336 4202122 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 0 0 1 0 1 0 17948 0 0 612 0 0 0 0 2103 0 0 20 0 0 0 0 0 0 0 0 0 0 0 0 0 10 0 0 0 0 0 0 0 11 11 12 0 12 0 52 752 0 0 0 0 0 0 0 743 0 14 0 0 12 0 0 1863 229 0 464 0 0 0 0 0 0 8588 97 7236426 92766 622 31 0 0 0 18 4 4 0 5 0 0 116013 7 0 0 752406
-ctxt 826091808
-btime 1611513513
-processes 288493
-procs_running 1
-procs_blocked 0
-softirq 175407567 14659158 51739474 28359 5901272 8879590 0 11988166 46104015 0 36107533
-EOF
-fi
+# A function for preparing fake content for certain system data interfaces which known to be restricted on Android OS.
+# All /proc entries are based on values retrieved from Fedora 43 KDE running on an expertbook-b1402cba, intel i3-1215u, and 8 GB of memory. Date 27/4/2026, Linux version 6.19.13-200.fc43.x86_64 
 
 if [ ! -f "/data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings/version" ]; then
 cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings/version"                                      
-Linux version 6.18-10040828 (arfshl@pd-andronix) (gcc version 14.2 (faked 04262026) #1 SMP PREEMPT_DYNAMIC Fri Apr 10 04:52:00 WIB 2026
+Linux version 6.19.13-10042000828 (arfshl@pd-andronix) (gcc (GCC) 15.2.1 12092021 (05232022) GNU ld version 2.45.10-31012026 #1 SMP PREEMPT_DYNAMIC Fri Apr 10 04:52:00 WIB 2026
+EOF
+fi
+
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings/stat" ]; then
+cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings/stat"
+cpu  97011 93 28431 2110461 1305 8475 3662 0 0 0
+cpu0 14596 1 2768 260831 238 944 1286 0 0 0
+cpu1 10120 13 2172 267769 169 692 524 0 0 0
+cpu2 18127 28 4330 256553 232 1017 431 0 0 0
+cpu3 7131 23 1571 272633 104 359 242 0 0 0
+cpu4 12044 11 4712 260870 195 2689 362 0 0 0
+cpu5 12568 0 4598 262577 132 954 307 0 0 0
+cpu6 12834 1 4779 262402 125 856 258 0 0 0
+cpu7 9588 11 3499 266822 108 961 249 0 0 0
+intr 5301718 0 1043 0 0 0 0 0 0 0 458 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 493862 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 73784 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 11112 0 0 0 0 0 0 0 64 9109 8205 8624 5260 6866 5097 5179 4485 169994 48 1411 17656 1984 678 1244 2188 1110 661 720 344 5 19918 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ctxt 8243615
+btime 1777295712
+processes 5985
+procs_running 2
+procs_blocked 0
+softirq 3074005 2127 586528 59 28761 72 0 14413 1445298 0 996747
 EOF
 fi
 
 if [ ! -f "/data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings/vmstat" ]; then
 cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu/proc/fakethings/vmstat"
-nr_free_pages 15717
-nr_zone_inactive_anon 87325
-nr_zone_active_anon 259521
-nr_zone_inactive_file 95508
-nr_zone_active_file 57839
-nr_zone_unevictable 58867
-nr_zone_write_pending 0
-nr_mlock 58867
-nr_page_table_pages 24569
-nr_kernel_stack 49552
-nr_bounce 0
-nr_zspages 80896
+nr_free_pages 106785
+nr_free_pages_blocks 54272
+nr_zone_inactive_anon 0
+nr_zone_active_anon 824464
+nr_zone_inactive_file 369777
+nr_zone_active_file 272971
+nr_zone_unevictable 170682
+nr_zone_write_pending 269
+nr_mlock 29
+nr_zspages 3
 nr_free_cma 0
-nr_inactive_anon 87325
-nr_active_anon 259521
-nr_inactive_file 95508
-nr_active_file 57839
-nr_unevictable 58867
-nr_slab_reclaimable 17709
-nr_slab_unreclaimable 47418
+nr_unaccepted 0
+numa_hit 6517425
+numa_miss 0
+numa_foreign 0
+numa_interleave 5014
+numa_local 6517425
+numa_other 0
+nr_inactive_anon 0
+nr_active_anon 824464
+nr_inactive_file 369777
+nr_active_file 272971
+nr_unevictable 170682
+nr_slab_reclaimable 16316
+nr_slab_unreclaimable 46863
 nr_isolated_anon 0
 nr_isolated_file 0
-workingset_refault 33002180
-workingset_activate 5498395
-workingset_restore 2354202
-workingset_nodereclaim 140006
-nr_anon_pages 344014
-nr_mapped 193745
-nr_file_pages 218441
-nr_dirty 0
+workingset_nodes 0
+workingset_refault_anon 0
+workingset_refault_file 0
+workingset_activate_anon 0
+workingset_activate_file 0
+workingset_restore_anon 0
+workingset_restore_file 0
+workingset_nodereclaim 0
+nr_anon_pages 1017057
+nr_mapped 188703
+nr_file_pages 620870
+nr_dirty 269
 nr_writeback 0
-nr_writeback_temp 0
-nr_shmem 1880
-nr_shmem_hugepages 0
+nr_shmem 190196
+nr_shmem_hugepages 297
 nr_shmem_pmdmapped 0
+nr_file_hugepages 0
+nr_file_pmdmapped 0
 nr_anon_transparent_hugepages 0
-nr_unstable 0
-nr_vmscan_write 8904094
-nr_vmscan_immediate_reclaim 139732
-nr_dirtied 8470080
-nr_written 16835370
-nr_indirectly_reclaimable 8273152
-nr_unreclaimable_pages 130861
-nr_dirty_threshold 31217
-nr_dirty_background_threshold 15589
-pgpgin 198399484
-pgpgout 31742368
-pgpgoutclean 45542744
-pswpin 3843200
-pswpout 8903884
-pgalloc_dma 192884869
-pgalloc_normal 190990320
+nr_vmscan_write 0
+nr_vmscan_immediate_reclaim 0
+nr_dirtied 90026
+nr_written 86985
+nr_throttled_written 0
+nr_kernel_misc_reclaimable 0
+nr_foll_pin_acquired 2227
+nr_foll_pin_released 2227
+nr_kernel_stack 19728
+nr_page_table_pages 14783
+nr_sec_page_table_pages 514
+nr_iommu_pages 514
+nr_swapcached 0
+pgpromote_success 0
+pgpromote_candidate 0
+pgpromote_candidate_nrl 0
+pgdemote_kswapd 0
+pgdemote_direct 0
+pgdemote_khugepaged 0
+pgdemote_proactive 0
+nr_hugetlb 0
+nr_balloon_pages 0
+nr_kernel_file_pages 0
+nr_dirty_threshold 142858
+nr_dirty_background_threshold 71341
+nr_memmap_pages 0
+nr_memmap_boot_pages 32256
+pgpgin 1741205
+pgpgout 442099
+pswpin 0
+pswpout 0
+pgalloc_dma 257
+pgalloc_dma32 2440068
+pgalloc_normal 6392058
 pgalloc_movable 0
+pgalloc_device 0
 allocstall_dma 0
-allocstall_normal 3197
-allocstall_movable 1493
+allocstall_dma32 0
+allocstall_normal 0
+allocstall_movable 0
+allocstall_device 0
 pgskip_dma 0
+pgskip_dma32 0
 pgskip_normal 0
 pgskip_movable 0
-pgfree 384653565
-pgactivate 34249517
-pgdeactivate 44271435
-pglazyfree 192
-pgfault 46133667
-pgmajfault 5568301
+pgskip_device 0
+pgfree 8961237
+pgactivate 0
+pgdeactivate 0
+pglazyfree 300931
+pgfault 6012900
+pgmajfault 12781
 pglazyfreed 0
-pgrefill 55909145
-pgsteal_kswapd 58467386
-pgsteal_direct 255950
-pgscan_kswapd 86628315
-pgscan_direct 415889
+pgrefill 0
+pgreuse 277645
+pgsteal_kswapd 0
+pgsteal_direct 0
+pgsteal_khugepaged 0
+pgsteal_proactive 0
+pgscan_kswapd 0
+pgscan_direct 0
+pgscan_khugepaged 0
+pgscan_proactive 0
 pgscan_direct_throttle 0
-pginodesteal 18
-slabs_scanned 31242197
-kswapd_inodesteal 1238474
-kswapd_low_wmark_hit_quickly 11637
-kswapd_high_wmark_hit_quickly 5411
-pageoutrun 32167
-pgrotated 213328
+pgscan_anon 0
+pgscan_file 0
+pgsteal_anon 0
+pgsteal_file 0
+zone_reclaim_success 0
+zone_reclaim_failed 0
+pginodesteal 0
+slabs_scanned 0
+kswapd_inodesteal 0
+kswapd_low_wmark_hit_quickly 0
+kswapd_high_wmark_hit_quickly 0
+pageoutrun 0
+pgrotated 4
 drop_pagecache 0
 drop_slab 0
 oom_kill 0
-pgmigrate_success 729722
-pgmigrate_fail 450
-compact_migrate_scanned 43510584
-compact_free_scanned 248175096
-compact_isolated 1494774
-compact_stall 6
-compact_fail 3
-compact_success 3
-compact_daemon_wake 9438
-compact_daemon_migrate_scanned 43502436
-compact_daemon_free_scanned 248107303
-unevictable_pgs_culled 66418
-unevictable_pgs_scanned 0
-unevictable_pgs_rescued 8484
-unevictable_pgs_mlocked 78830
-unevictable_pgs_munlocked 8508
-unevictable_pgs_cleared 11455
-unevictable_pgs_stranded 11455
+numa_pte_updates 0
+numa_huge_pte_updates 0
+numa_hint_faults 0
+numa_hint_faults_local 0
+numa_pages_migrated 0
+pgmigrate_success 0
+pgmigrate_fail 0
+thp_migration_success 0
+thp_migration_fail 0
+thp_migration_split 0
+compact_migrate_scanned 0
+compact_free_scanned 0
+compact_isolated 0
+compact_stall 0
+compact_fail 0
+compact_success 0
+compact_daemon_wake 0
+compact_daemon_migrate_scanned 0
+compact_daemon_free_scanned 0
+htlb_buddy_alloc_success 0
+htlb_buddy_alloc_fail 0
+cma_alloc_success 0
+cma_alloc_fail 0
+unevictable_pgs_culled 1551966
+unevictable_pgs_scanned 1352146
+unevictable_pgs_rescued 1356318
+unevictable_pgs_mlocked 4201
+unevictable_pgs_munlocked 4172
+unevictable_pgs_cleared 0
+unevictable_pgs_stranded 0
+thp_fault_alloc 0
+thp_fault_fallback 0
+thp_fault_fallback_charge 0
+thp_collapse_alloc 0
+thp_collapse_alloc_failed 0
+thp_file_alloc 2704
+thp_file_fallback 0
+thp_file_fallback_charge 0
+thp_file_mapped 0
+thp_split_page 0
+thp_split_page_failed 0
+thp_deferred_split_page 0
+thp_underused_split_page 0
+thp_split_pmd 0
+thp_scan_exceed_none_pte 0
+thp_scan_exceed_swap_pte 0
+thp_scan_exceed_share_pte 0
+thp_split_pud 0
+thp_zero_page_alloc 0
+thp_zero_page_alloc_failed 0
+thp_swpout 0
+thp_swpout_fallback 0
+balloon_inflate 0
+balloon_deflate 0
+balloon_migrate 0
 swap_ra 0
-swap_ra_hit 7
-speculative_pgfault 221449963
+swap_ra_hit 0
+swpin_zero 0
+swpout_zero 0
+ksm_swpin_copy 0
+cow_ksm 0
+zswpin 0
+zswpout 0
+zswpwb 0
+direct_map_level2_splits 152
+direct_map_level3_splits 0
+direct_map_level2_collapses 0
+direct_map_level3_collapses 0
+nr_unstable 0
 EOF
 fi
 
@@ -187,7 +282,7 @@ if [ -n "$(ls -A ${root}/binds)" ]; then
       . $f
     done
 fi
-command+=" -k 6.18-10040828"
+command+=" -k 6.19.13-10042000828"
 command+=" -b /dev"
 command+=" -b /proc"
 command+=" -b /sys"

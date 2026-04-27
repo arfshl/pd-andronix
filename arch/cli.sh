@@ -21,33 +21,36 @@ case "$ARCH" in
     x86_64|amd64)
         ARCH="x86_64"
         ;;
+    x86|i386|i686)
+        ARCH="i686"
+        ;;
     *)
         echo "Unsupported architecture: $ARCH"
         exit 1
         ;;
 esac
 
-mkdir -p /data/data/com.termux/files/home/pd-andronix/debian
-cd /data/data/com.termux/files/home/pd-andronix/debian
-URL=$(curl -Ls https://github.com/termux/proot-distro/raw/master/distro-plugins/debian.sh | grep "TARBALL_URL\['$ARCH'\]" | cut -d '"' -f2)
-curl -L $URL --output debian.tar.xz
-proot --link2symlink tar -xJpf debian.tar.xz
-rm debian.tar.xz
-mv debian-*-* debian
-mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/binds
-mkdir -p /data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings
+mkdir -p /data/data/com.termux/files/home/pd-andronix/arch
+cd /data/data/com.termux/files/home/pd-andronix/arch
+URL=$(curl -Ls https://github.com/termux/proot-distro/raw/master/distro-plugins/archlinux.sh | grep "TARBALL_URL\['$ARCH'\]" | cut -d '"' -f2)
+curl -L $URL --output arch.tar.xz
+proot --link2symlink tar -xJpf arch.tar.xz
+rm arch.tar.xz
+mv arch-* arch
+mkdir -p /data/data/com.termux/files/home/pd-andronix/arch/binds
+mkdir -p /data/data/com.termux/files/home/pd-andronix/arch/arch/proc/fakethings
 
 # A function for preparing fake content for certain system data interfaces which known to be restricted on Android OS.
 # All /proc entries are based on values retrieved from Fedora 43 KDE running on an expertbook-b1402cba, intel i3-1215u, and 8 GB of memory. Date 27/4/2026, Linux version 6.19.13-200.fc43.x86_64 
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/version" ]; then
-cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/version"
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/arch/arch/proc/fakethings/version" ]; then
+cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/arch/arch/proc/fakethings/version"
 Linux version 6.19.13-10042000828 (arfshl@pd-andronix) (gcc (GCC) 15.2.1 12092021 (05232022) GNU ld version 2.45.10-31012026 #1 SMP PREEMPT_DYNAMIC Fri Apr 10 04:52:00 WIB 2026
 EOF
 fi
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/stat" ]; then
-cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/stat"
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/arch/arch/proc/fakethings/stat" ]; then
+cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/arch/arch/proc/fakethings/stat"
 cpu  97011 93 28431 2110461 1305 8475 3662 0 0 0
 cpu0 14596 1 2768 260831 238 944 1286 0 0 0
 cpu1 10120 13 2172 267769 169 692 524 0 0 0
@@ -67,8 +70,8 @@ softirq 3074005 2127 586528 59 28761 72 0 14413 1445298 0 996747
 EOF
 fi
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/vmstat" ]; then
-cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/debian/debian/proc/fakethings/vmstat"
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/arch/arch/proc/fakethings/vmstat" ]; then
+cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/arch/arch/proc/fakethings/vmstat"
 nr_free_pages 106785
 nr_free_pages_blocks 54272
 nr_zone_inactive_anon 0
@@ -267,17 +270,17 @@ nr_unstable 0
 EOF
 fi
 
-if [ ! -f "/data/data/com.termux/files/usr/bin/debian-cli" ]; then
-cat << "EOF" > /data/data/com.termux/files/usr/bin/debian-cli
+if [ ! -f "/data/data/com.termux/files/usr/bin/arch-cli" ]; then
+cat << "EOF" > /data/data/com.termux/files/usr/bin/arch-cli
 #!/bin/bash
-root="/data/data/com.termux/files/home/pd-andronix/debian"
+root="/data/data/com.termux/files/home/pd-andronix/arch"
 ## unset LD_PRELOAD in case termux-exec is installed
 unset LD_PRELOAD
 command="proot"
 command+=" --kill-on-exit"
 command+=" --link2symlink"
 command+=" -0"
-command+=" -r ${root}/debian"
+command+=" -r ${root}/arch"
 if [ -n "$(ls -A ${root}/binds)" ]; then
     for f in ${root}/binds/* ;do
       . $f
@@ -287,15 +290,15 @@ command+=" -k 6.18-10040828"
 command+=" -b /dev"
 command+=" -b /proc"
 command+=" -b /sys"
-command+=" -b ${root}/debian:/dev/shm"
+command+=" -b ${root}/arch:/dev/shm"
 command+=" -b /proc/self/fd/2:/dev/stderr"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /dev/urandom:/dev/random"
 command+=" -b /proc/self/fd:/dev/fd"
-command+=" -b ${root}/debian/proc/fakethings/stat:/proc/stat"
-command+=" -b ${root}/debian/proc/fakethings/vmstat:/proc/vmstat"
-command+=" -b ${root}/debian/proc/fakethings/version:/proc/version"
+command+=" -b ${root}/arch/proc/fakethings/stat:/proc/stat"
+command+=" -b ${root}/arch/proc/fakethings/vmstat:/proc/vmstat"
+command+=" -b ${root}/arch/proc/fakethings/version:/proc/version"
 ## uncomment the following line to have access to the home directory of termux
 #command+=" -b /data/data/com.termux/files/home:/root"
 ## uncomment the following line to mount /sdcard directly to / 
@@ -317,11 +320,11 @@ fi
 EOF
 fi
 
-# chmod +x /data/data/com.termux/files/home/pd-andronix/debian/debian/root/.bash_profile
-echo "127.0.0.1 localhost localhost" > /data/data/com.termux/files/home/pd-andronix/debian/debian/etc/hosts
-echo "nameserver 1.1.1.1" > /data/data/com.termux/files/home/pd-andronix/debian/debian/etc/resolv.conf
-chmod +x /data/data/com.termux/files/home/pd-andronix/debian/debian/etc/resolv.conf
-termux-fix-shebang /data/data/com.termux/files/usr/bin/debian-cli
-chmod +x /data/data/com.termux/files/usr/bin/debian-cli
+# chmod +x /data/data/com.termux/files/home/pd-andronix/arch/arch/root/.bash_profile
+echo "127.0.0.1 localhost localhost" > /data/data/com.termux/files/home/pd-andronix/arch/arch/etc/hosts
+echo "nameserver 1.1.1.1" > /data/data/com.termux/files/home/pd-andronix/arch/arch/etc/resolv.conf
+chmod +x /data/data/com.termux/files/home/pd-andronix/arch/arch/etc/resolv.conf
+termux-fix-shebang /data/data/com.termux/files/usr/bin/arch-cli
+chmod +x /data/data/com.termux/files/usr/bin/arch-cli
 echo "Installation Complete!"
-echo "You can now launch debian-cli with the command debian-cli from next time"
+echo "You can now launch arch-cli with the command arch-cli from next time"
