@@ -21,6 +21,9 @@ case "$ARCH" in
     x86_64|amd64)
         ARCH="x86_64"
         ;;
+    x86|i686)
+        ARCH="i686"
+        ;;
     *)
         echo "Unsupported architecture: $ARCH"
         exit 1
