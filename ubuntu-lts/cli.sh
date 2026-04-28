@@ -32,7 +32,6 @@ cd /data/data/com.termux/files/home/pd-andronix/ubuntu-lts
 curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/ubuntu-lts/ubuntu-lts-$ARCH.tar.xz --output ubuntu-lts.tar.xz
 proot --link2symlink tar -xJpf ubuntu-lts.tar.xz
 rm ubuntu-lts.tar.xz
-mv ubuntu-lts-*-* ubuntu-lts
 mkdir -p /data/data/com.termux/files/home/pd-andronix/ubuntu-lts/binds
 mkdir -p /data/data/com.termux/files/home/pd-andronix/ubuntu-lts/ubuntu-lts/proc/fakethings
 
