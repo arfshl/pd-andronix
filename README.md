@@ -1,0 +1,55 @@
+# maintenance progress..
+
+## You Need
+- [Termux App](https://github.com/termux/termux-app/releases)
+- [Termux:X11](https://github.com/termux/termux-x11/releases)
+- [VNC Viewer](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android)
+
+Supported Desktop Environment:
+- XFCE, MATE, LXQt, LXDE (stable and worked well)
+
+| Distribution     | Flavor/Desktop Environment   |
+|------------------|------------|
+
+| [Alpine Linux](https://github.com/arfshl/pd-andronix/tree/main/alpine) | XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Arch Linux](https://github.com/arfshl/pd-andronix/tree/main/arch) | XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Debian Stable](https://github.com/arfshl/pd-andronix/tree/main/debian) (Recommended for beginners) | XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Fedora](https://github.com/arfshl/pd-andronix/tree/main/fedora) | XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Manjaro](https://github.com/arfshl/pd-andronix/tree/main/manjaro) | XFCE LXQt MATE LXDE Cinnamon KDE | 
+| [OpenSUSE Leap](https://github.com/arfshl/pd-andronix/tree/main/opensuse/) |  XFCE LXQt MATE LXDE Cinnamon KDE   |
+| [OpenSUSE Tumbleweed*](https://github.com/arfshl/pd-andronix/tree/main/opensuse-tumbleweed/)     |  CLI XFCE LXQt MATE LXDE Cinnamon KDE   |
+| [Ubuntu Regular Release](https://github.com/arfshl/pd-andronix/tree/main/ubuntu) | XFCE LXQt MATE LXDE Cinnamon KDE
+| [Ubuntu LTS*](https://github.com/arfshl/pd-andronix/tree/main/ubuntu-lts) (Recommended for beginners) | CLI XFCE LXQt MATE LXDE Cinnamon KDE
+| [Void Linux](https://github.com/arfshl/pd-andronix/tree/main/void) | XFCE LXQt MATE LXDE Cinnamon KDE |
+
+#### * Using custom-built rootfs
+
+## Uninstalling
+```
+- Rootfs-only uninstall
+#!/bin/sh
+cd ~/pd-andronix && chmod -R 777 [distro aliases] && rm -rf [distro aliases]
+
+rm -f /data/data/com.termux/files/usr/bin/[distro aliases]
+rm -f /data/data/com.termux/files/usr/bin/[distro aliases]-x11
+
+
+- Full Uninstall, including in-termux dependency
+#!/bin/sh
+cd ~/pd-andronix && chmod -R 777 [distro aliases] && rm -rf [distro aliases]
+
+rm -f /data/data/com.termux/files/usr/bin/[distro aliases]
+rm -f /data/data/com.termux/files/usr/bin/[distro aliases]-x11
+
+apt remove proot pulseaudio -y && apt autoremove -y
+
+Replace [distro aliases] with distro alias you're using, available on installation page
+```
+
+# Credits
+
+[andronixapp/andronixorigin](https://github.com/AndronixApp/AndronixOrigin) Inspiration for making this project, VNC startup mechanism, Licensed under MIT License.
+
+[linuxmasterdroid/termux-desktops](https://github.com/LinuxDroidMaster/Termux-Desktops) Pulseaudio startup mechanism, Licensed under GPLv3.
+
+Pulseaudio fix for One UI, [Issue #19623 on termux-packages](https://github.com/termux/termux-packages/issues/19623)
