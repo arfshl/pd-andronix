@@ -10,7 +10,6 @@ Supported Desktop Environment:
 
 | Distribution     | Flavor/Desktop Environment   |
 |------------------|------------|
-
 | [Alpine Linux](https://github.com/arfshl/pd-andronix/tree/main/alpine) | XFCE LXQt MATE LXDE Cinnamon KDE |
 | [Arch Linux](https://github.com/arfshl/pd-andronix/tree/main/arch) | XFCE LXQt MATE LXDE Cinnamon KDE |
 | [Debian Stable](https://github.com/arfshl/pd-andronix/tree/main/debian) (Recommended for beginners) | XFCE LXQt MATE LXDE Cinnamon KDE |
