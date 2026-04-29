@@ -10,16 +10,16 @@ Supported Desktop Environment:
 
 | Distribution     | Flavor/Desktop Environment   |
 |------------------|------------|
-| [Alpine Linux](https://github.com/arfshl/pd-andronix/tree/main/alpine) | XFCE LXQt MATE LXDE Cinnamon KDE |
-| [Arch Linux](https://github.com/arfshl/pd-andronix/tree/main/arch) | XFCE LXQt MATE LXDE Cinnamon KDE |
-| [Debian Stable](https://github.com/arfshl/pd-andronix/tree/main/debian) (Recommended for beginners) | XFCE LXQt MATE LXDE Cinnamon KDE |
-| [Fedora](https://github.com/arfshl/pd-andronix/tree/main/fedora) | XFCE LXQt MATE LXDE Cinnamon KDE |
-| [Manjaro](https://github.com/arfshl/pd-andronix/tree/main/manjaro) | XFCE LXQt MATE LXDE Cinnamon KDE | 
-| [OpenSUSE Leap](https://github.com/arfshl/pd-andronix/tree/main/opensuse/) |  XFCE LXQt MATE LXDE Cinnamon KDE   |
+| [Alpine Linux](https://github.com/arfshl/pd-andronix/tree/main/alpine) | CLI  XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Arch Linux](https://github.com/arfshl/pd-andronix/tree/main/arch) | CLI  XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Debian Stable](https://github.com/arfshl/pd-andronix/tree/main/debian) (Recommended for beginners) | CLI  XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Fedora](https://github.com/arfshl/pd-andronix/tree/main/fedora) | CLI  XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Manjaro](https://github.com/arfshl/pd-andronix/tree/main/manjaro) | CLI  XFCE LXQt MATE LXDE Cinnamon KDE | 
+| [OpenSUSE Leap](https://github.com/arfshl/pd-andronix/tree/main/opensuse/) | CLI  XFCE LXQt MATE LXDE Cinnamon KDE   |
 | [OpenSUSE Tumbleweed*](https://github.com/arfshl/pd-andronix/tree/main/opensuse-tumbleweed/)     |  CLI XFCE LXQt MATE LXDE Cinnamon KDE   |
-| [Ubuntu Regular Release](https://github.com/arfshl/pd-andronix/tree/main/ubuntu) | XFCE LXQt MATE LXDE Cinnamon KDE
+| [Ubuntu Regular Release](https://github.com/arfshl/pd-andronix/tree/main/ubuntu) | CLI  XFCE LXQt MATE LXDE Cinnamon KDE
 | [Ubuntu LTS*](https://github.com/arfshl/pd-andronix/tree/main/ubuntu-lts) (Recommended for beginners) | CLI XFCE LXQt MATE LXDE Cinnamon KDE
-| [Void Linux](https://github.com/arfshl/pd-andronix/tree/main/void) | XFCE LXQt MATE LXDE Cinnamon KDE |
+| [Void Linux](https://github.com/arfshl/pd-andronix/tree/main/void) | CLI  XFCE LXQt MATE LXDE Cinnamon KDE |
 
 #### * Using custom-built rootfs
 
