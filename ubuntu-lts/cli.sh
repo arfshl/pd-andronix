@@ -332,4 +332,4 @@ termux-fix-shebang /data/data/com.termux/files/usr/bin/ubuntu-lts-cli
 chmod +x /data/data/com.termux/files/usr/bin/ubuntu-lts-cli
 echo "Installation Complete!"
 echo "You can now launch ubuntu-lts-cli with the command ubuntu-lts-cli from next time"
-rm cli.sh
+rm -- "$0"

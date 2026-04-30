@@ -21,7 +21,7 @@ case "$ARCH" in
     x86_64|amd64)
         ARCH="x86_64"
         ;;
-    x86|i386|i686)
+    x86|i686)
         ARCH="i686"
         ;;
     *)
@@ -30,27 +30,25 @@ case "$ARCH" in
         ;;
 esac
 
-mkdir -p /data/data/com.termux/files/home/pd-andronix/alpine-cli
-cd /data/data/com.termux/files/home/pd-andronix/alpine-cli
-URL=$(curl -Ls https://github.com/termux/proot-distro/raw/master/distro-plugins/alpine.sh | grep "TARBALL_URL\['$ARCH'\]" | cut -d '"' -f2)
-curl -L $URL --output alpine.tar.xz
-proot --link2symlink tar -xJpf alpine.tar.xz
-rm alpine.tar.xz
-mv alpine-* alpine
-mkdir -p /data/data/com.termux/files/home/pd-andronix/alpine-cli/binds
-mkdir -p /data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/proc/fakethings
+mkdir -p /data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce
+cd /data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce
+curl -L https://github.com/arfshl/pd-custom-rootfs/releases/download/opensuse-tumbleweed/opensuse-tumbleweed-$ARCH.tar.xz --output opensuse-tumbleweed.tar.xz
+proot --link2symlink tar -xJpf opensuse-tumbleweed.tar.xz
+rm opensuse-tumbleweed.tar.xz
+mkdir -p /data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/binds
+mkdir -p /data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/proc/fakethings
 
 # A function for preparing fake content for certain system data interfaces which known to be restricted on Android OS.
 # All /proc entries are based on values retrieved from Fedora 43 KDE running on an expertbook-b1402cba, intel i3-1215u, and 8 GB of memory. Date 27/4/2026, Linux version 6.19.13-200.fc43.x86_64 
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/proc/fakethings/version" ]; then
-cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/proc/fakethings/version"
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/proc/fakethings/version" ]; then
+cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/proc/fakethings/version"                                      
 Linux version 6.19.13-1004200828 (arfshl@pd-andronix) (gcc (GCC) 15.2.1 12092021 (05232022) GNU ld version 2.45.10-31012026 #1 SMP PREEMPT_DYNAMIC Fri Apr 10 04:52:00 WIB 2026
 EOF
 fi
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/proc/fakethings/stat" ]; then
-cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/proc/fakethings/stat"
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/proc/fakethings/stat" ]; then
+cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/proc/fakethings/stat"
 cpu  97011 93 28431 2110461 1305 8475 3662 0 0 0
 cpu0 14596 1 2768 260831 238 944 1286 0 0 0
 cpu1 10120 13 2172 267769 169 692 524 0 0 0
@@ -70,8 +68,8 @@ softirq 3074005 2127 586528 59 28761 72 0 14413 1445298 0 996747
 EOF
 fi
 
-if [ ! -f "/data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/proc/fakethings/vmstat" ]; then
-cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/proc/fakethings/vmstat"
+if [ ! -f "/data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/proc/fakethings/vmstat" ]; then
+cat << "EOF" > "/data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/proc/fakethings/vmstat"
 nr_free_pages 106785
 nr_free_pages_blocks 54272
 nr_zone_inactive_anon 0
@@ -270,10 +268,10 @@ nr_unstable 0
 EOF
 fi
 
-if [ ! -f "/data/data/com.termux/files/usr/bin/alpine-cli" ]; then
-cat << "EOF" > /data/data/com.termux/files/usr/bin/alpine-cli
+if [ ! -f "/data/data/com.termux/files/usr/bin/opensuse-tumbleweed-xfce" ]; then
+cat << "EOF" > /data/data/com.termux/files/usr/bin/opensuse-tumbleweed-xfce
 #!/bin/bash
-root="/data/data/com.termux/files/home/pd-andronix/alpine-cli"
+root="/data/data/com.termux/files/home/pd-andronix/debian"
 kernelrelease="6.19.13-1004200828"
 kernelversion="#1 SMP PREEMPT_DYNAMIC Fri Apr 10 04:52:00 WIB 2026"
 
@@ -284,7 +282,7 @@ command=(
   --kill-on-exit
   --link2symlink
   -0
-  -r "${root}/alpine"
+  -r "${root}/debian"
 )
 
 if [ -n "$(ls -A "${root}/binds" 2>/dev/null)" ]; then
@@ -298,15 +296,15 @@ command+=(
   -b /dev
   -b /proc
   -b /sys
-  -b "${root}/alpine:/dev/shm"
+  -b "${root}/debian:/dev/shm"
   -b /proc/self/fd/2:/dev/stderr
   -b /proc/self/fd/1:/dev/stdout
   -b /proc/self/fd/0:/dev/stdin
   -b /dev/urandom:/dev/random
   -b /proc/self/fd:/dev/fd
-  -b "${root}/alpine/proc/fakethings/stat:/proc/stat"
-  -b "${root}/alpine/proc/fakethings/vmstat:/proc/vmstat"
-  -b "${root}/alpine/proc/fakethings/version:/proc/version"
+  -b "${root}/debian/proc/fakethings/stat:/proc/stat"
+  -b "${root}/debian/proc/fakethings/vmstat:/proc/vmstat"
+  -b "${root}/debian/proc/fakethings/version:/proc/version"
   # uncomment the following line to have access to the home directory of termux
   #-b /data/data/com.termux/files/home:/root/termux-home
   # uncomment the following line to the home sdcard
@@ -329,12 +327,25 @@ fi
 EOF
 fi
 
-# chmod +x /data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/root/.bash_profile
-echo "127.0.0.1 localhost localhost" > /data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/etc/hosts
-echo "nameserver 1.1.1.1" > /data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/etc/resolv.conf
-chmod +x /data/data/com.termux/files/home/pd-andronix/alpine-cli/alpine/etc/resolv.conf
-termux-fix-shebang /data/data/com.termux/files/usr/bin/alpine-cli
-chmod +x /data/data/com.termux/files/usr/bin/alpine-cli
+# chmod +x /data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/root/.bash_profile
+echo "127.0.0.1 localhost localhost" > /data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/etc/hosts
+echo "nameserver 1.1.1.1" > /data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/etc/resolv.conf
+chmod +x /data/data/com.termux/files/home/pd-andronix/opensuse-tumbleweed-xfce/opensuse-tumbleweed/etc/resolv.conf
+termux-fix-shebang /data/data/com.termux/files/usr/bin/opensuse-tumbleweed-xfce
+chmod +x /data/data/com.termux/files/usr/bin/opensuse-tumbleweed-xfce
+
+# Setup opensuse-xfce
+opensuse-tumbleweed-xfce 'zypper refresh && zypper -n dup && zypper -n in wget'
+
+opensuse-tumbleweed-xfce 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/opensuse/xfce/install-xfce.sh -O install-xfce.sh && chmod +x install-xfce.sh && ./install-xfce.sh'
+
+echo 'To start command line session: opensuse-tumbleweed-xfce'
+echo 'To start VNC server: startvnc'
+echo 'To stop VNC server: stopvnc'
+echo 'To restart VNC server: restartvnc'
+echo 'Default user: opensuse-xfce'
+echo 'Default password: 123'    
+echo 'VNC server address: 127.0.0.1:5900'
+echo 'Default VNC password: 1234567890'
 echo "Installation Complete!"
-echo "You can now launch alpine-cli with the command alpine-cli from next time"
 rm -- "$0"

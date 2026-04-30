@@ -337,4 +337,4 @@ termux-fix-shebang /data/data/com.termux/files/usr/bin/arch-cli
 chmod +x /data/data/com.termux/files/usr/bin/arch-cli
 echo "Installation Complete!"
 echo "You can now launch arch-cli with the command arch-cli from next time"
-rm cli.sh
+rm -- "$0"

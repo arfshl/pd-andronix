@@ -336,7 +336,7 @@ chmod +x /data/data/com.termux/files/home/pd-andronix/arch-lxqt/arch/etc/resolv.
 termux-fix-shebang /data/data/com.termux/files/usr/bin/arch-lxqt
 chmod +x /data/data/com.termux/files/usr/bin/arch-lxqt
 arch-lxqt 'pacman -Sy --noconfirm wget'
-arch-lxqt 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/arch/lxqt/install.sh -O install.sh && chmod +x install.sh && ./install.sh && rm install.sh'
+arch-lxqt 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/arch/lxqt/install.sh -O install.sh && chmod +x install.sh && ./install.sh'
 
 echo 'To start command line session: arch-lxqt'
 echo 'To start VNC server: startvnc'
@@ -347,4 +347,4 @@ echo 'Default password: 123'
 echo 'VNC server address: 127.0.0.1:5900'
 echo 'Default VNC password: 1234567890'
 echo "Installation Complete!"
-rm cli.sh
+rm -- "$0"

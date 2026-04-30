@@ -329,7 +329,7 @@ chmod +x /data/data/com.termux/files/usr/bin/manjaro-lxqt
 
 # setup desktop
 manjaro-lxqt 'pacman -Sy --noconfirm wget'
-manjaro-lxqt 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/arch/lxqt/install.sh -O install.sh && chmod +x install.sh && ./install.sh && rm install.sh'
+manjaro-lxqt 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/arch/lxqt/install.sh -O install.sh && chmod +x install.sh && ./install.sh'
 
 echo 'To start command line session: manjaro-lxqt'
 echo 'To start VNC server: startvnc'
@@ -340,4 +340,4 @@ echo 'Default password: 123'
 echo 'VNC server address: 127.0.0.1:5900'
 echo 'Default VNC password: 1234567890'
 echo "Installation Complete!"
-rm lxqt.sh
+rm -- "$0"

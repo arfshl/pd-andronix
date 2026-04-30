@@ -328,4 +328,4 @@ termux-fix-shebang /data/data/com.termux/files/usr/bin/manjaro-cli
 chmod +x /data/data/com.termux/files/usr/bin/manjaro-cli
 echo "Installation Complete!"
 echo "You can now launch manjaro-cli with the command manjaro-cli from next time"
-rm cli.sh
+rm -- "$0"

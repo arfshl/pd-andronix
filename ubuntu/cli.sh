@@ -337,4 +337,4 @@ termux-fix-shebang /data/data/com.termux/files/usr/bin/ubuntu-cli
 chmod +x /data/data/com.termux/files/usr/bin/ubuntu-cli
 echo "Installation Complete!"
 echo "You can now launch ubuntu-cli with the command ubuntu-cli from next time"
-rm cli.sh
+rm -- "$0"

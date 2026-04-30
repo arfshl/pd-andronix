@@ -334,7 +334,7 @@ chmod +x /data/data/com.termux/files/usr/bin/ubuntu-lts-lxqt
 # setup desktop
 ubuntu-lts-lxqt 'apt update && apt install wget -y'
 
-ubuntu-lts-lxqt 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/ubuntu/lxqt/install.sh -O install.sh && chmod +x install.sh && ./install.sh && rm install.sh'
+ubuntu-lts-lxqt 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/ubuntu/lxqt/install.sh -O install.sh && chmod +x install.sh && ./install.sh'
 
 echo "Installation Complete!"
 echo 'To start command line session: ubuntu-lts-lxqt'
@@ -345,4 +345,4 @@ echo 'Default user: ubuntu-lxqt'
 echo 'Default password: 123'    
 echo 'VNC server address: 127.0.0.1:5900'
 echo 'Default VNC password: 1234567890'
-rm cli.sh
+rm -- "$0"

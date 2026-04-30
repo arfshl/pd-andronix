@@ -340,7 +340,7 @@ chmod +x /data/data/com.termux/files/usr/bin/ubuntu-lxde
 
 ubuntu-lxde 'apt update && apt install wget -y'
 
-ubuntu-lxde 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/ubuntu/lxde/install.sh -O install.sh && chmod +x install.sh && ./install.sh && rm install.sh'
+ubuntu-lxde 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/ubuntu/lxde/install.sh -O install.sh && chmod +x install.sh && ./install.sh'
 
 echo "Installation Complete!"
 echo 'To start command line session: ubuntu-lxde'
@@ -351,4 +351,4 @@ echo 'Default user: ubuntu-lxde'
 echo 'Default password: 123'    
 echo 'VNC server address: 127.0.0.1:5900'
 echo 'Default VNC password: 1234567890'
-rm cli.sh
+rm -- "$0"

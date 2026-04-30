@@ -338,4 +338,4 @@ termux-fix-shebang /data/data/com.termux/files/usr/bin/void-cli
 chmod +x /data/data/com.termux/files/usr/bin/void-cli
 echo "Installation Complete!"
 echo "You can now launch void-cli with the command void-cli from next time"
-rm cli.sh
+rm -- "$0"

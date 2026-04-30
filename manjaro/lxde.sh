@@ -329,7 +329,7 @@ chmod +x /data/data/com.termux/files/usr/bin/manjaro-lxde
 
 # setup desktop
 manjaro-lxde 'pacman -Sy --noconfirm wget'
-manjaro-lxde 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/arch/lxde/install.sh -O install.sh && chmod +x install.sh && ./install.sh && rm install.sh'
+manjaro-lxde 'wget https://raw.githubusercontent.com/arfshl/proot-distro-desktop/refs/heads/main/arch/lxde/install.sh -O install.sh && chmod +x install.sh && ./install.sh'
 
 echo 'To start command line session: manjaro-lxde'
 echo 'To start VNC server: startvnc'
@@ -340,4 +340,4 @@ echo 'Default password: 123'
 echo 'VNC server address: 127.0.0.1:5900'
 echo 'Default VNC password: 1234567890'
 echo "Installation Complete!"
-rm lxde.sh
+rm -- "$0"
