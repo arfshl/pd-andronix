@@ -347,5 +347,4 @@ echo 'Default password: 123'
 echo 'VNC server address: 127.0.0.1:5900'
 echo 'Default VNC password: 1234567890'
 echo "Installation Complete!"
-echo "You can now launch debian-cli with the command debian-cli from next time"
 rm cli.sh
