@@ -10,11 +10,13 @@ Supported Desktop Environment:
 
 | Distribution     | Flavor/Desktop Environment   |
 |------------------|------------|
-| [Alpine Linux](https://github.com/arfshl/pd-andronix/tree/main/alpine) | CLI XFCE LXQt MATE LXDE |
+| [Alpine Linux](https://github.com/arfshl/pd-andronix/tree/main/alpine) | CLI XFCE LXQt MATE |
 | [Arch Linux](https://github.com/arfshl/pd-andronix/tree/main/arch) | CLI XFCE LXQt MATE LXDE |
 | [Debian Stable](https://github.com/arfshl/pd-andronix/tree/main/debian) (Recommended for beginners) | CLI XFCE LXQt MATE LXDE |
 | [Fedora](https://github.com/arfshl/pd-andronix/tree/main/fedora) | CLI XFCE LXQt MATE LXDE |
 | [Manjaro](https://github.com/arfshl/pd-andronix/tree/main/manjaro) | CLI XFCE LXQt MATE LXDE | 
+| [OpenSUSE Leap](https://github.com/arfshl/pd-andronix/tree/main/opensuse/) | CLI XFCE LXQt MATE LXDE |
+| [OpenSUSE Tumbleweed*](https://github.com/arfshl/pd-andronix/tree/main/opensuse-tumbleweed/) | CLI XFCE LXQt MATE LXDE |
 | [Ubuntu Regular Release](https://github.com/arfshl/pd-andronix/tree/main/ubuntu) | CLI  XFCE LXQt MATE LXDE |
 | [Ubuntu LTS*](https://github.com/arfshl/pd-andronix/tree/main/ubuntu-lts) (Recommended for beginners) | CLI XFCE LXQt MATE LXDE |
 | [Void Linux](https://github.com/arfshl/pd-andronix/tree/main/void) | CLI XFCE LXQt MATE LXDE |
