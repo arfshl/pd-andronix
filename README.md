@@ -2,6 +2,8 @@
 
 Forked from AndronixApp/AndronixOrigin
 
+Support for android 5/6 without proot-distro, based on andronixapp/andronixorigin, and running latest distro from proot-distro
+
 ## You Need
 - [Termux App](https://github.com/termux/termux-app/releases)
 - [VNC Viewer](https://play.google.com/store/apps/details?id=com.realvnc.viewer.android)
