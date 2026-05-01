@@ -1,5 +1,12 @@
 # Alpine Linux
 
+## CLI
+- distro aliases: alpine-cli
+
+#### Install
+    apt update && apt install wget -y && wget https://raw.githubusercontent.com/arfshl/pd-andronix/refs/heads/main/alpine/cli.sh && sh cli.sh
+   
+
 ## XFCE
 - distro aliases: alpine-xfce
 - Username: alpine-xfce
